@@ -7,7 +7,7 @@
     GPL3
 
 ************************************/
-
+*, *:after, *:before { box-sizing: border-box; -moz-box-sizing: border-box; }
 html {
 	font-size: 100%;
 	-webkit-text-size-adjust: 100%;
@@ -18,21 +18,23 @@ body {
 	font-size: 15px;
 	color: #444;
     width: 663px;
-    margin: 0 auto;
+    margin: 0 auto 10em;
     line-height: 1.4em;
 }
 
 
 a {
 	color: #000;
-	-o-transition:.5s;
+    text-decoration: none;
+    border-bottom: 1px dashed;
+}
+a:hover, a:active {
+	color: #494;
+    -o-transition:.5s;
 	-ms-transition:.5s;
 	-moz-transition:.5s;
 	-webkit-transition:.5s;
 	transition:.5s;
-}
-a:hover, a:active {
-	color: #494;
 }
 
 h1, h2, h3, h4, h5, h6 {
@@ -55,7 +57,6 @@ h2 {
 	margin-bottom: 1em;
 	font-weight: normal;
     font-variant:small-caps;
-    margin-left: -1em;
 }
 
 h3 {
@@ -71,6 +72,7 @@ blockquote {
 
 p, li {
     margin-top: 10px;
+    margin-left: 1em;
 }
 
 hr {
@@ -78,7 +80,7 @@ hr {
     margin-bottom: 40px;
     border: none;
     width: 80%;
-    border-top: 1px solid #222;
+    border-top: 1px solid #999;
 }
    
 ol, ul {
@@ -109,7 +111,9 @@ pre {
 	color: #777;
 	margin-bottom: 30px;
 }
-
+.center {
+    text-align: center;
+}
 .figure {
 	display: inline-block;
 }
@@ -123,9 +127,19 @@ img {
 
 @media screen and (max-width: 767px) {
 	body{
-		font-size: 1.1em;
 		line-height: 1.3em;
 		width: 450px;
 		box-sizing: border-box;
+        
 	}
+}
+@media screen and (max-width: 450px) {
+    p, li{
+        margin-left: 0;
+    }   
+    body {
+        width: auto;
+        margin: 0.5em;
+    }
+    
 }
