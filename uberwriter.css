@@ -1,8 +1,10 @@
 /************************************
 	
-	uberwriter.css
+	based on uberwriter.css
 	A simple and clean stylesheet
 	for pure text and stuff
+    http://uberwriter.wolfvollprecht.de/
+    GPL3
 
 ************************************/
 
@@ -11,22 +13,26 @@ html {
 	-webkit-text-size-adjust: 100%;
 	-ms-text-size-adjust: 100%;
 }
-
 body {
 	font-family: Vollkorn, Georgia, Times, serif;
 	font-size: 15px;
-	color: #333;
+	color: #444;
     width: 663px;
     margin: 0 auto;
     line-height: 1.4em;
 }
-@media screen and (max-width: 767px) {
-	body{
-		font-size: 1.1em;
-		line-height: 1.3em;
-		width: 450px;
-		box-sizing: border-box;
-	}
+
+
+a {
+	color: #000;
+	-o-transition:.5s;
+	-ms-transition:.5s;
+	-moz-transition:.5s;
+	-webkit-transition:.5s;
+	transition:.5s;
+}
+a:hover, a:active {
+	color: #494;
 }
 
 h1, h2, h3, h4, h5, h6 {
@@ -38,6 +44,8 @@ h1 {
 	margin: 0;
 	margin-top: 1.111em;
 	font-weight: normal;
+    text-align: center;
+	font-variant:small-caps;
 }
 
 h2 {
@@ -46,6 +54,8 @@ h2 {
 	margin-top: 1.333em;
 	margin-bottom: 1em;
 	font-weight: normal;
+    font-variant:small-caps;
+    margin-left: -1em;
 }
 
 h3 {
@@ -100,9 +110,6 @@ pre {
 	margin-bottom: 30px;
 }
 
-.author::after {
-	content: ' ,';
-}
 .figure {
 	display: inline-block;
 }
@@ -112,4 +119,13 @@ img {
 .caption {
 	text-align: center;
 	background: #F6F6F6;
+}
+
+@media screen and (max-width: 767px) {
+	body{
+		font-size: 1.1em;
+		line-height: 1.3em;
+		width: 450px;
+		box-sizing: border-box;
+	}
 }
