@@ -143,3 +143,6 @@ img {
     }
     
 }
+footer p, footer a {
+    color: #777;
+}
