@@ -1,5 +1,5 @@
 /************************************
-	
+
 	based on uberwriter.css
 	A simple and clean stylesheet
 	for pure text and stuff
@@ -8,35 +8,125 @@
 
     Feel free to steal this; it's GPL3
 
+	With other things copied from
+	https://vale.rocks/posts/css-reset;
+
 ************************************/
-*, *:after, *:before { box-sizing: border-box; -moz-box-sizing: border-box; }
-html {
-	font-size: 100%;
+*,
+::after,
+::before {
+	box-sizing: border-box;
+	-moz-box-sizing: border-box;
+}
+* {
+	padding: 0;
+	margin: 0;
+}
+
+:root {
+	font-size: 1rem;
 	-webkit-text-size-adjust: 100%;
 	-ms-text-size-adjust: 100%;
+	font-family: system-ui, sans-serif;
+
+    background-color: #f0f0f0; /* Old browsers */
 }
+
+html {
+	-webkit-text-size-adjust: none;
+	text-size-adjust: none;
+	line-height: 1.5;
+	-webkit-font-smoothing: antialiased;
+	block-size: 100%;
+}
+
 body {
-	font-family: Vollkorn, Georgia, Times, serif;
-	font-size: 15px;
-	color: #444;
-    width: 663px;
+	min-block-size: 100%;
+	font-size: 1rem;
+	color: #333;
+	width: max-content;
+	max-width: min(max-content, 100%);
     margin: 0 auto 10em;
     line-height: 1.4em;
 
-    background: #f0f0f0; /* Old browsers */
-    background: -moz-linear-gradient(left, #f0f0f0 0%, #ffffff 50%, #f0f0f0 100%); /* FF3.6+ */
-    background: -webkit-gradient(linear, left top, right top, color-stop(0%,#f0f0f0), color-stop(50%,#ffffff), color-stop(100%,#f0f0f0)); /* Chrome,Safari4+ */
-    background: -webkit-linear-gradient(left, #f0f0f0 0%,#ffffff 50%,#f0f0f0 100%); /* Chrome10+,Safari5.1+ */
-    background: -o-linear-gradient(left, #f0f0f0 0%,#ffffff 50%,#f0f0f0 100%); /* Opera 11.10+ */
-    background: -ms-linear-gradient(left, #f0f0f0 0%,#ffffff 50%,#f0f0f0 100%); /* IE10+ */
-    background: linear-gradient(to right, #f0f0f0 0%,#ffffff 50%,#f0f0f0 100%); /* W3C */
-    filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#f0f0f0', endColorstr='#f0f0f0',GradientType=1 ); /* IE6-9 */
+    background:
+		linear-gradient(to bottom, #f0f0f0 0%, transparent 1em, transparent 100%),
+		linear-gradient(to right, #f0f0f0 0%, white 50%,#f0f0f0 100%);
 }
+
+:root{
+	--width: 30rem;
+}
+@media ( min-width: 63rem ) {
+	main {
+		display: grid;
+		grid-template-columns: [columbus] var(--width) [personal] var(--width);
+		grid-template-rows: auto repeat(11, 1fr);
+		grid-gap: 1em;
+		&>section {
+			display: grid;
+			grid-template-columns: 1fr;
+			grid-template-rows: subgrid;
+			grid-row: 1 / span 12;
+		}
+		section section {
+			grid-row: auto;
+		}
+	}
+	section#columbus {
+		grid-column: columbus;
+
+		section {
+			background-color: rgb( from white r g b / 0.5 );
+			border: 2px solid white;
+			border-radius: 1em 0 0 1em;
+			transform: skew(0, -1deg);
+		}
+		header {
+			perspective-origin: left center;
+			transform: translateX(-16%) scale(0.6) perspective(2rem) rotateY(1deg) rotateX(-1deg);
+			font-size: 200%;
+			width: 180%;
+		}
+	}
+	section#personal {
+		grid-column: personal;
+		> * {
+			position: relative;
+			top: 50%;
+		}
+		section {
+			border: 2px solid #f0f0f0;
+			background-color: rgb( from #f0f0f0 r g b / 0.5 );
+			border-radius: 1em 0 0 1em;
+			transform: skew(0, 1deg);
+		}
+		header {
+			perspective-origin: left center;
+			transform: translateX(-3rem) translateX(-30%) scale(0.6) perspective(2rem) rotateY(-1deg) rotateX(-1deg);
+			box-shadow: 0 0 0 1px transparent;
+			font-size: 200%;
+			width: 180%;
+
+			p {
+				text-align: right;
+			}
+		}
+	}
+}
+main>header,
+main>section {
+	max-width: var(--width);
+}
+section section {
+	padding-inline: 1em;
+	padding-block: 1em;
+}
+
 
 a {
 	color: #000;
-    text-decoration: none;
-    border-bottom: 1px solid;
+	text-decoration: underline;
 }
 a:hover, a:active {
 	color: #494;
@@ -48,13 +138,14 @@ a:hover, a:active {
 }
 
 h1, h2, h3, h4, h5, h6 {
+	font-family: Rockwell, 'Rockwell Nova', 'Roboto Slab', 'DejaVu Serif', 'Sitka Small', serif;
 }
 
 h1 {
 	font-size: 1.714em;
 	line-height: 1.333em;
 	margin: 0;
-	margin-top: 1.111em;
+	margin-top: 2em;
 	font-weight: normal;
     text-align: center;
 	font-variant:small-caps;
@@ -62,9 +153,9 @@ h1 {
 
 h2 {
 	font-size: 1.333em;
-	line-height: 1.5em;
-	margin-top: 1.333em;
-	margin-bottom: 1em;
+	line-height: 1em;
+	margin-top: 0;
+	margin-bottom: 0.5em;
 	font-weight: normal;
     font-variant:small-caps;
 }
@@ -92,7 +183,7 @@ hr {
     width: 80%;
     border-top: 1px solid #999;
 }
-   
+
 ol, ul {
     margin: 1.143em 0 1.143em 40px;
    	padding: 0 0 0 20px;
@@ -116,7 +207,6 @@ pre {
 }
 .author, .date {
 	font-family: Helvetica, Arial, sans-serif;
-	font-size: 14px;
 	display: inline-block;
 	color: #777;
 	margin-bottom: 30px;
@@ -130,29 +220,17 @@ pre {
 img {
 	max-width: 600px;
 }
-.caption {
-	text-align: center;
-	background: #F6F6F6;
+img.inline {
+  max-height: 1em;
 }
 
-@media screen and (max-width: 767px) {
-	body{
-		line-height: 1.3em;
-		width: 450px;
-		box-sizing: border-box;
-        
+footer {
+	grid-area: footer;
+	padding-block-start: 3rem;
+	padding-block-end: 3rem;
+
+	p,
+	a {
+		color: #666;
 	}
-}
-@media screen and (max-width: 450px) {
-    p, li{
-        margin-left: 0;
-    }   
-    body {
-        width: auto;
-        margin: 0.5em;
-    }
-    
-}
-footer p, footer a {
-    color: #777;
 }
