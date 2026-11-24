@@ -1,0 +1,64 @@
+# Builds the static site, stamps the footer with the build date, and deploys it to GitHub Pages.
+name: Build and deploy to GitHub Pages
+
+on:
+  push:
+    branches: [master]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+# Only one deployment at a time; let an in-progress deploy finish rather than cancel it.
+concurrency:
+  group: pages
+  cancel-in-progress: false
+
+jobs:
+  build:
+    runs-on: ubuntu-slim
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v7
+
+      - name: Configure GitHub Pages
+        uses: actions/configure-pages@v6
+
+      # Copy publishable files into _site, leaving out repo tooling.
+      - name: Assemble site
+        run: |
+          mkdir _site
+          rsync -a \
+            --exclude '.git' \
+            --exclude '.github' \
+            --exclude '_site' \
+            --exclude 'serve.bash' \
+            ./ _site/
+
+      # Replace the footer's <time> element with the current UTC date.
+      - name: Stamp build date in footer
+        run: |
+          iso_date="$(date -u +%Y-%m-%d)"
+          human_date="$(date -u '+%-d %B %Y')"
+          sed -i -E \
+            "s|<time datetime=\"[^\"]*\">[^<]*</time>|<time datetime=\"${iso_date}\">${human_date}</time>|" \
+            _site/index.html
+          grep -q "datetime=\"${iso_date}\"" _site/index.html
+
+      - name: Upload Pages artifact
+        uses: actions/upload-pages-artifact@v5
+        with:
+          path: _site
+
+  deploy:
+    needs: build
+    runs-on: ubuntu-slim
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - name: Deploy to GitHub Pages
+        id: deployment
+        uses: actions/deploy-pages@v5
