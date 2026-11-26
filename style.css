@@ -45,7 +45,6 @@ body {
 	font-size: 1rem;
 	color: #333;
 	width: max-content;
-	max-width: min(max-content, 100%);
     margin: 0 auto 10em;
     line-height: 1.4em;
 
@@ -63,6 +62,7 @@ body {
 		grid-template-columns: [columbus] var(--width) [personal] var(--width);
 		grid-template-rows: auto repeat(11, 1fr);
 		grid-gap: 1em;
+
 		&>section {
 			display: grid;
 			grid-template-columns: 1fr;
@@ -71,7 +71,17 @@ body {
 		}
 		section section {
 			grid-row: auto;
+			position: relative;
 		}
+		section span {
+			position: absolute;
+			bottom: 0;
+			left: 0;
+			line-height: 1;
+			font-size: 0.8em;
+			transform-origin: top left;
+			transform: translateX(1rem) rotate(-90deg);
+			opacity: 0.8;		}
 	}
 	section#columbus {
 		grid-column: columbus;
@@ -81,12 +91,6 @@ body {
 			border: 2px solid white;
 			border-radius: 1em 0 0 1em;
 			transform: skew(0, -1deg);
-		}
-		header {
-			perspective-origin: left center;
-			transform: translateX(-16%) scale(0.6) perspective(2rem) rotateY(1deg) rotateX(-1deg);
-			font-size: 200%;
-			width: 180%;
 		}
 	}
 	section#personal {
@@ -101,26 +105,42 @@ body {
 			border-radius: 1em 0 0 1em;
 			transform: skew(0, 1deg);
 		}
-		header {
-			perspective-origin: left center;
-			transform: translateX(-3rem) translateX(-30%) scale(0.6) perspective(2rem) rotateY(-1deg) rotateX(-1deg);
-			box-shadow: 0 0 0 1px transparent;
-			font-size: 200%;
-			width: 180%;
+	}
+}
+section#columbus {
+	header {
+		perspective-origin: left center;
+		transform: translateX(-16%) scale(0.6) perspective(2rem) rotateY(1deg) rotateX(-1deg);
+		font-size: 200%;
+		width: 180%;
+	}
+}
+section#personal {
+	header {
+		perspective-origin: left center;
+		transform: translateX(-3rem) translateX(-30%) scale(0.6) perspective(2rem) rotateY(-1deg) rotateX(-1deg);
+		box-shadow: 0 0 0 1px transparent;
+		font-size: 200%;
+		width: 180%;
 
-			p {
-				text-align: right;
-			}
+		p {
+			text-align: right;
 		}
 	}
 }
+
 main>header,
 main>section {
 	max-width: var(--width);
 }
-section section {
-	padding-inline: 1em;
-	padding-block: 1em;
+section {
+	p {
+		margin-left: 1.5em;
+	}
+	section {
+		padding-inline: 1em;
+		padding-block: 1em;
+	}
 }
 
 
@@ -173,7 +193,6 @@ blockquote {
 
 p, li {
     margin-top: 10px;
-    margin-left: 1em;
 }
 
 hr {
@@ -228,9 +247,16 @@ footer {
 	grid-area: footer;
 	padding-block-start: 3rem;
 	padding-block-end: 3rem;
+	padding-inline-start: 1rem;
+	padding-inline-end: 1rem;
 
 	p,
 	a {
 		color: #666;
+	}
+
+	p {
+		max-width: var(--width);
+		margin-inline: auto;
 	}
 }
